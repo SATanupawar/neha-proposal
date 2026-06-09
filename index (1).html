@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For Neha 💍</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Satisfy&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ffc2d9 0%, #fff0f5 50%, #ffc2d9 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .fh {
+      position: fixed;
+      animation: floatUp linear infinite;
+      opacity: 0.5;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    @keyframes floatUp {
+      0%   { transform: translateY(110vh) rotate(0deg); opacity:0.55; }
+      100% { transform: translateY(-60px) rotate(25deg); opacity:0; }
+    }
+
+    .card {
+      background: rgba(255,255,255,0.93);
+      border-radius: 22px;
+      padding: 1.8rem 1.8rem 2rem;
+      max-width: 300px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 8px 36px rgba(255,80,130,0.18);
+      position: relative;
+      z-index: 2;
+    }
+
+    .big-heart {
+      font-size: 2.8rem;
+      animation: pulse 1.3s ease-in-out infinite;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    @keyframes pulse {
+      0%,100% { transform: scale(1); }
+      50%      { transform: scale(1.18); }
+    }
+
+    .title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2rem;
+      color: #e84393;
+      margin-bottom: 0.5rem;
+    }
+
+    .question {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.75rem;
+      color: #d63384;
+      margin-bottom: 2rem;
+      line-height: 1.35;
+    }
+
+    .btn-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+      height: 50px;
+      margin-bottom: 0.5rem;
+    }
+
+    .btn-yes {
+      background: linear-gradient(135deg, #ff4d8d, #e8006a);
+      color: white;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 50px;
+      font-family: 'Satisfy', cursive;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(232,0,106,0.3);
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+      transition: box-shadow 0.15s;
+    }
+
+    .btn-yes:hover {
+      box-shadow: 0 6px 22px rgba(232,0,106,0.5);
+    }
+
+    .btn-no {
+      background: white;
+      color: #e84393;
+      border: 2px solid #f4a0c5;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-family: 'Satisfy', cursive;
+      font-size: 0.88rem;
+      cursor: pointer;
+      white-space: nowrap;
+      position: absolute;
+      left: calc(50% + 70px);
+      top: 4px;
+      transition: left 0.28s cubic-bezier(.4,1.4,.6,1), top 0.28s cubic-bezier(.4,1.4,.6,1);
+      z-index: 1;
+    }
+
+    .msg-box {
+      display: none;
+      padding: 0.9rem 1.1rem;
+      border-radius: 16px;
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.5rem;
+      animation: fadeIn 0.5s ease;
+      background: linear-gradient(135deg, #ffe0ec, #ffd0e8);
+      color: #c0005a;
+      line-height: 1.5;
+      margin-top: 0.5rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity:0; transform:scale(0.88); }
+      to   { opacity:1; transform:scale(1); }
+    }
+
+    .confetti-piece {
+      position: absolute;
+      border-radius: 2px;
+      animation: confettiFall 2s ease-in forwards;
+      pointer-events: none;
+    }
+
+    @keyframes confettiFall {
+      0%   { transform: translateY(-10px) rotate(0deg); opacity:1; }
+      100% { transform: translateY(450px) rotate(800deg); opacity:0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="mainCard">
+    <span class="big-heart">💖</span>
+    <div class="title">Hi Neha !</div>
+    <div class="question" id="questionText">Will you marry me? 💍</div>
+
+    <div id="btnWrapper">
+      <div class="btn-row" id="btnRow">
+        <button class="btn-yes" id="yesBtn" onclick="handleYes()">Yes 💍</button>
+        <button class="btn-no"  id="noBtn">No 🙈</button>
+      </div>
+    </div>
+
+    <div class="msg-box" id="yesMsg">
+      She said Yes !! 🎉💍🥰<br>
+      You are my whole world, Neha !!
+    </div>
+  </div>
+
+  <script>
+    const HEARTS = ["❤️","💕","💗","💓","💘","🌸","✨","💞"];
+    function spawnHeart() {
+      const h = document.createElement('div');
+      h.className = 'fh';
+      h.textContent = HEARTS[Math.floor(Math.random() * HEARTS.length)];
+      h.style.left = Math.random() * 95 + 'vw';
+      h.style.fontSize = (0.9 + Math.random() * 1.1) + 'rem';
+      h.style.animationDuration = (5 + Math.random() * 5) + 's';
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 10000);
+    }
+    for (let i = 0; i < 5; i++) setTimeout(spawnHeart, i * 250);
+    setInterval(spawnHeart, 800);
+
+    const noBtn  = document.getElementById('noBtn');
+    const btnRow = document.getElementById('btnRow');
+    const FLEE_DIST = 70;
+    let isFleeing = false;
+
+    const HOME_LEFT_EXPR = () => (btnRow.offsetWidth / 2) + 70;
+    const HOME_TOP = 4;
+
+    function initNoBtn() {
+      noBtn.style.left = HOME_LEFT_EXPR() + 'px';
+      noBtn.style.top  = HOME_TOP + 'px';
+    }
+    setTimeout(initNoBtn, 100);
+
+    document.getElementById('mainCard').addEventListener('mousemove', onMove);
+    document.getElementById('mainCard').addEventListener('mouseleave', onLeave);
+
+    function onMove(e) {
+      const rect = btnRow.getBoundingClientRect();
+      const curX = e.clientX - rect.left;
+      const curY = e.clientY - rect.top;
+      const noCX = noBtn.offsetLeft + noBtn.offsetWidth  / 2;
+      const noCY = noBtn.offsetTop  + noBtn.offsetHeight / 2;
+      const dist = Math.hypot(curX - noCX, curY - noCY);
+
+      if (dist < FLEE_DIST) {
+        isFleeing = true;
+        noBtn.textContent = 'You have to marry me! 💃';
+        fleeFrom(curX, curY);
+      } else if (isFleeing) {
+        isFleeing = false;
+        returnHome();
+      }
+    }
+
+    function onLeave() {
+      if (isFleeing) { isFleeing = false; returnHome(); }
+    }
+
+    function fleeFrom(curX, curY) {
+      const aW = btnRow.offsetWidth;
+      const aH = btnRow.offsetHeight;
+      const bW = noBtn.offsetWidth  || 130;
+      const bH = noBtn.offsetHeight || 42;
+      const noCX = noBtn.offsetLeft + bW / 2;
+      const noCY = noBtn.offsetTop  + bH / 2;
+      let dx = noCX - curX, dy = noCY - curY;
+      const len = Math.hypot(dx, dy) || 1;
+      dx /= len; dy /= len;
+      let newLeft = noBtn.offsetLeft + dx * 80 + (Math.random() - 0.5) * 20;
+      let newTop  = noBtn.offsetTop  + dy * 80 + (Math.random() - 0.5) * 20;
+      newLeft = Math.max(4, Math.min(aW - bW - 4, newLeft));
+      newTop  = Math.max(-30, Math.min(aH + 20, newTop));
+      noBtn.style.left = newLeft + 'px';
+      noBtn.style.top  = newTop  + 'px';
+    }
+
+    function returnHome() {
+      noBtn.style.left = HOME_LEFT_EXPR() + 'px';
+      noBtn.style.top  = HOME_TOP + 'px';
+      setTimeout(() => { if (!isFleeing) noBtn.textContent = 'No 🙈'; }, 300);
+    }
+
+    function handleYes() {
+      document.getElementById('btnWrapper').style.display = 'none';
+      document.getElementById('questionText').textContent = 'She said Yes !! 🥳';
+      document.getElementById('yesMsg').style.display = 'block';
+      launchConfetti();
+    }
+
+    function launchConfetti() {
+      const COLORS = ['#ff4d8d','#f9a8c9','#ffe066','#a0e7a0','#7ecaff','#e8b4f8','#ffb347'];
+      const card = document.getElementById('mainCard');
+      for (let i = 0; i < 60; i++) {
+        setTimeout(() => {
+          const c = document.createElement('div');
+          c.className = 'confetti-piece';
+          c.style.background = COLORS[Math.floor(Math.random() * COLORS.length)];
+          c.style.left   = (Math.random() * 280) + 'px';
+          c.style.top    = '0px';
+          c.style.width  = (5 + Math.random() * 8) + 'px';
+          c.style.height = (5 + Math.random() * 8) + 'px';
+          c.style.animationDuration = (1.3 + Math.random() * 1.2) + 's';
+          card.appendChild(c);
+          setTimeout(() => c.remove(), 3200);
+        }, i * 35);
+      }
+    }
+  </script>
+</body>
+</html>
